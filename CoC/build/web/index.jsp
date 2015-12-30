@@ -15,9 +15,8 @@
         <title>CoC index page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
         
-        <form action="log">
+        <form method="post"  action="log">
             Username:<br>
             <input type="text" name="username" >
             <br>
