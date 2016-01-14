@@ -5,8 +5,17 @@
  */
 package com;
 
+import com.mysql.jdbc.Connection;
+import com.uthldap.Uthldap;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Array;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author DP
  */
 public class mainBL extends HttpServlet {
-
+    private static final String USERNAME="admin";
+    private static final String PASSWORD="admin";
+    private static final String CONN_STRING="jdbc:mysql://localhost:3306/coc";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,43 +55,45 @@ public class mainBL extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+            int coursesmax = 45;
+            String viewname;   //name of the view that will follow
+            // Create arrays of selected courses 
+            String[] numcourses3 = request.getParameterValues("third");
+            String[] numcourses4 = request.getParameterValues("fourth");
+            String[] numcourses5 = request.getParameterValues("fifth");
+            
+            // Check if selected courses are legal
+            if (numcourses3.length + numcourses4.length + numcourses5.length > 18 ) {
+                error err1 = new error(1);
+                viewname="error";
+            
+            }
+            else {
+                viewname="result";
+            }
+            System.out.print(Arrays.toString(numcourses3));
+
+            Connection conn=null;
+   
+            try {
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
+                conn= (Connection) DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
+                System.out.println("Connected!!");
+
+
+                conn.close();
+            }catch(SQLException e) {
+                System.err.println(e);
+            }
+        
+        RequestDispatcher view = request.getRequestDispatcher(viewname+".jsp");
+        view.forward(request, response); 
         processRequest(request, response);
+     }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-}
+ 

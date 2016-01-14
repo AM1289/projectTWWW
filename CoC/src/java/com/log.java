@@ -17,6 +17,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
+import com.error;
+
 /**
  *
  * @author DP
@@ -68,27 +70,38 @@ public class log extends HttpServlet {
             String pass=request.getParameter("password");
             Uthldap ldap = new Uthldap(user,pass);
             Connection conn=null;
-            
-            try {
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
-                conn= (Connection) DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
-                System.out.println("Connected!!");
-                String query = " insert into students (name, mail)" + " values (?, ?)";
-                PreparedStatement preparedStmt = conn.prepareStatement(query);
-                preparedStmt.setString (1, ldap.getName());
-                preparedStmt.setString (2, ldap.getMail());
-
-                // execute the preparedstatement
-                preparedStmt.execute();
-
-                conn.close();
-            }catch(SQLException e) {
-                System.err.println(e);
+            System.out.println(ldap.getDept());
+            if (ldap.getDept().equals("inf")) {
+                try {
+                
+                    DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
+                    conn= (Connection) DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
+                    System.out.println("Connected!!");
+                    String query = " insert into students (name, mail)" + " values (?, ?)";
+                    PreparedStatement preparedStmt = conn.prepareStatement(query);
+                    preparedStmt.setString (1, ldap.getName());
+                    preparedStmt.setString (2, ldap.getMail());
+                    // execute the preparedstatement
+                    preparedStmt.execute();
+                    conn.close();
+                    
+                
+                 
+                    }catch(SQLException e) {
+                        System.err.println(e);
+                    }
+                    RequestDispatcher view = request.getRequestDispatcher("mainBL.jsp");
+                    view.forward(request, response); 
+                    processRequest(request, response);
+            }
+            else {
+                error err1 = new error(0);
+                RequestDispatcher view = request.getRequestDispatcher("error.jsp");
+                view.forward(request, response); 
+                processRequest(request, response);    
             }
             
-        RequestDispatcher view = request.getRequestDispatcher("mainBL.jsp");
-        view.forward(request, response); 
-        processRequest(request, response);
+        
     }
 
 }

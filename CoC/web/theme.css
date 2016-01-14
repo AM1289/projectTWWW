@@ -1,28 +1,10 @@
-/* ----- Logo ----- */
-
-#logo a {
-	background-image:url('../images/wflogo.png'); 
-	min-height:0;
-	height:40px;
-}
-* html #logo a {/* IE6 png Support */
-	background-image: none;
-	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/wflogo.png", sizingMethod="crop");
-}
 
 /* ----- Backgrounds ----- */
 html{
 	background-image:none;	background-color:#EEEEEE;
 }
-#logo{
-	background-image:none;	background-color:#DEDEDE;
-}
 #container, html.embed{
 	background-color:#FFFFFF;
-}
-.safari .wufoo input.file{
-	background:none;
-	border:none;
 }
 
 .wufoo li.focused{
