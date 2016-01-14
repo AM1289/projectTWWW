@@ -15,6 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -68,16 +71,20 @@ public class mainBL extends HttpServlet {
             String[] numcourses5 = request.getParameterValues("fifth");
             
             // Check if selected courses are legal
-            if (numcourses3.length + numcourses4.length + numcourses5.length > 18 ) {
-                error err1 = new error(1);
+            transaction trans = new transaction(numcourses3,numcourses4,numcourses5);
+            if (!trans.isLegal() ) {
                 viewname="error";
-            
             }
             else {
-                viewname="result";
+                try {
+                    List<String> res = trans.result();
+                    request.setAttribute("list", res);
+                   
+                } catch (SQLException ex) {
+                    Logger.getLogger(mainBL.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 viewname="result";
             }
-            System.out.print(Arrays.toString(numcourses3));
-
             Connection conn=null;
    
             try {

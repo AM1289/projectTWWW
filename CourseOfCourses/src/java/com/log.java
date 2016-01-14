@@ -70,7 +70,7 @@ public class log extends HttpServlet {
             String pass=request.getParameter("password");
             Uthldap ldap = new Uthldap(user,pass);
             Connection conn=null;
-            System.out.println(ldap.getDept());
+            
             if (ldap.getDept().equals("inf")) {
                 try {
                 
@@ -95,6 +95,7 @@ public class log extends HttpServlet {
                     processRequest(request, response);
             }
             else {
+                //An o foithths den anoikei sto tmhma
                 error err1 = new error(0);
                 RequestDispatcher view = request.getRequestDispatcher("error.jsp");
                 view.forward(request, response); 
