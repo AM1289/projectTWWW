@@ -13,7 +13,7 @@
 <html>
 <head>
 
-<title> mainBL logic page</title>
+<title> error page</title>
 
 <!-- Meta Tags -->
 <meta charset="utf-8">
@@ -43,9 +43,9 @@
 </header><ul>
 <li id="foli1" class="notranslate">
     <fieldset>
-        <% error err1=new error(); 
-           out.print("<br>" + err1.getErrName());
-        %>
+        <% error err1=new error(); %>
+        <%= err1.getErrName()%>
+        
         
     </body>
 </html>

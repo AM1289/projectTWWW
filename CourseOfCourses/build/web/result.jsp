@@ -4,8 +4,10 @@
     Author     : DP
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
@@ -42,13 +44,13 @@
 <li id="foli1" class="notranslate">
 <fieldset>
 
-       
-        <%
-            List styles = (List) request.getAttribute("list");
-            Iterator it = styles.iterator();
-            while(it.hasNext()) {
-            out.print("<br>" + it.next());
-        }
-        %>
+    <table>      
+    <c:forEach items="${list}" var="item">
+    <tr>
+      <td><c:out value="${item}" /></td>
+    </tr>
+    </c:forEach>
+    </table>
+
     </body>
 </html>

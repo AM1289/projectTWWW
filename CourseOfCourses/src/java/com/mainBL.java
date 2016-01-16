@@ -29,8 +29,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author DP
  */
 public class mainBL extends HttpServlet {
-    private static final String USERNAME="admin";
-    private static final String PASSWORD="admin";
+    private static final String USERNAME="root";
+    private static final String PASSWORD="2651073620";
     private static final String CONN_STRING="jdbc:mysql://localhost:3306/coc";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -4,7 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/web/error.jsp</file>
+            <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/web/mainBL.jsp</file>
+            <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/src/java/com/error.java</file>
             <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/web/result.jsp</file>
+            <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/src/java/com/log.java</file>
+            <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/src/java/com/transaction.java</file>
             <file>file:/C:/Users/DP/Documents/NetBeansProjects/CoC/src/java/com/mainBL.java</file>
         </group>
     </open-files>

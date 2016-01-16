@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -68,6 +70,7 @@ public class transaction {
         int i;
         int curr=0;
         List<Integer> rslist = new ArrayList<Integer>();
+        Set<String> hs = new HashSet<>();
         Connection conn=null;
         String name;
         int code=0;
@@ -93,9 +96,11 @@ public class transaction {
                 curr++;
             }
         }
+        /*int remove = rslist.size();
+        System.out.println(remove);
         for( i=0;i<rslist.size();i++){
             System.out.println(rslist.get(i));
-        } 
+        } */
          try {
                 
                     DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
@@ -134,9 +139,15 @@ public class transaction {
                     }catch(SQLException e) {
                         System.err.println(e);
                     }
-        for( i=0;i<rsfin.size();i++){
-            System.out.println(rsfin.get(i));
-        } 
+         
+         //Αφαιρω απο την τελικη λιστα τα μαθηματα που επιλεχθηκαν
+        /*for( i=0;i<remove;i++){
+            System.out.println(rsfin.get(i)+i);
+            rsfin.remove(i);
+        } */
+        hs.addAll(rsfin);
+        rsfin.clear();
+        rsfin.addAll(hs);
         return(rsfin);
         
     }
