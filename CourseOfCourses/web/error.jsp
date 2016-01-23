@@ -8,6 +8,7 @@
 <%@page import="com.error"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
@@ -36,7 +37,7 @@
 
 <h1 id="logo"> Course Of Courses</h1>
 
-<form id="form2" name="form2" class="wufoo topLabel page" accept-charset="UTF-8" method="post" action="mainBL">
+<form id="form2" name="form2" class="wufoo topLabel page" accept-charset="UTF-8" method="post">
   
 <header id="header" class="info">
 <h2>Δυστυχώς δεν μπορείτε να συνεχίσετε στην εφαρμογή μας γιατί κάποιο σφάλμα προέκυψε<br> Λεπτομέρειες Σφάλματος:</h2>
@@ -45,7 +46,11 @@
     <fieldset>
         <% error err1=new error(); %>
         <%= err1.getErrName()%>
-        
-        
+    </fieldset>
+    </li>
+</ul>
+    </form>      
     </body>
+    
+    
 </html>

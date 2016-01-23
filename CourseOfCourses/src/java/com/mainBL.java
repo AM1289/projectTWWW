@@ -23,6 +23,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  *
@@ -69,9 +71,13 @@ public class mainBL extends HttpServlet {
             String[] numcourses3 = request.getParameterValues("third");
             String[] numcourses4 = request.getParameterValues("fourth");
             String[] numcourses5 = request.getParameterValues("fifth");
-            
+            HttpSession session = request.getSession();
             // Check if selected courses are legal
             transaction trans = new transaction(numcourses3,numcourses4,numcourses5);
+            required req = new required(1);
+            required req2 = new required(2);
+            required req3 = new required(3);
+            required req4 = new required(4);
             if (!trans.isLegal() ) {
                 viewname="error";
             }
@@ -79,7 +85,22 @@ public class mainBL extends HttpServlet {
                 try {
                     List<String> res = trans.result();
                     request.setAttribute("list", res);
-                   
+                    List<String> required = null;
+                    required=req.result();
+                    
+                    List<String> required2 = null;
+                    required2=req2.result();
+                    
+                    List<String> required3 = null;
+                    required3=req3.result();
+                    
+                    List<String> required4 = null;
+                    required4=req4.result();
+                    
+                    session.setAttribute("sreq1", required);
+                    session.setAttribute("sreq2", required2);
+                    session.setAttribute("sreq3", required3);
+                    session.setAttribute("sreq4", required4);
                 } catch (SQLException ex) {
                     Logger.getLogger(mainBL.class.getName()).log(Level.SEVERE, null, ex);
                 }

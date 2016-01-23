@@ -71,18 +71,18 @@ public class log extends HttpServlet {
             Uthldap ldap = new Uthldap(user,pass);
             Connection conn=null;
             
-            if (ldap.getDept().equals("inf")) {
+            //if (ldap.getDept().equals("inf")) {
                 try {
                 
                     DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
                     conn= (Connection) DriverManager.getConnection(CONN_STRING,USERNAME,PASSWORD);
                     System.out.println("Connected!!");
-                    String query = " insert into students (name, mail)" + " values (?, ?)";
-                    PreparedStatement preparedStmt = conn.prepareStatement(query);
-                    preparedStmt.setString (1, ldap.getName());
-                    preparedStmt.setString (2, ldap.getMail());
+                    //String query = " insert into students (name, mail)" + " values (?, ?)";
+                    //PreparedStatement preparedStmt = conn.prepareStatement(query);
+                    //preparedStmt.setString (1, ldap.getName());
+                    //preparedStmt.setString (2, ldap.getMail());
                     // execute the preparedstatement
-                    preparedStmt.execute();
+                    //preparedStmt.execute();
                     conn.close();
                     
                 
@@ -94,15 +94,15 @@ public class log extends HttpServlet {
                     view.forward(request, response); 
                     processRequest(request, response);
             }
-            else {
+            //else {
                 //An o foithths den anoikei sto tmhma
-                error err1 = new error(0);
-                RequestDispatcher view = request.getRequestDispatcher("error.jsp");
-                view.forward(request, response); 
-                processRequest(request, response);    
+              //  error err1 = new error(0);
+                //RequestDispatcher view = request.getRequestDispatcher("error.jsp");
+               // view.forward(request, response); 
+               // processRequest(request, response);    
             }
             
         
-    }
+//    }
 
-}
+//}

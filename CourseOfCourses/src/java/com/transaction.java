@@ -24,8 +24,8 @@ public class transaction {
     error errcode = new error();
     int maxcourses =45;
     String[] c3,c4,c5;
-    private static final String USERNAME="admin";
-    private static final String PASSWORD="admin";
+    private static final String USERNAME="root";
+    private static final String PASSWORD="2651073620";
     private static final String CONN_STRING="jdbc:mysql://localhost:3306/coc";
     
     public transaction(String[] courses3, String[] courses4, String[] courses5) {
@@ -70,6 +70,7 @@ public class transaction {
         int i;
         int curr=0;
         List<Integer> rslist = new ArrayList<Integer>();
+
         Set<String> hs = new HashSet<>();
         Connection conn=null;
         String name;
@@ -96,11 +97,7 @@ public class transaction {
                 curr++;
             }
         }
-        /*int remove = rslist.size();
-        System.out.println(remove);
-        for( i=0;i<rslist.size();i++){
-            System.out.println(rslist.get(i));
-        } */
+        
          try {
                 
                     DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
@@ -108,6 +105,7 @@ public class transaction {
                     System.out.println("Connected again!!");
                     PreparedStatement statement = (PreparedStatement)conn.prepareStatement("SELECT DISTINCT name FROM courses WHERE code = ?");
                     PreparedStatement statement2 =(PreparedStatement)conn.prepareStatement("SELECT prerequisites FROM courses WHERE name= ?");
+                    
                     for (i=0;i<rslist.size();i++) {
                         statement.setInt(1,rslist.get(i));
                         rs = statement.executeQuery();
@@ -136,15 +134,9 @@ public class transaction {
                     }
                     conn.close();
                
-                    }catch(SQLException e) {
-                        System.err.println(e);
-                    }
-         
-         //Αφαιρω απο την τελικη λιστα τα μαθηματα που επιλεχθηκαν
-        /*for( i=0;i<remove;i++){
-            System.out.println(rsfin.get(i)+i);
-            rsfin.remove(i);
-        } */
+        }catch(SQLException e) {
+            System.err.println(e);
+        }
         hs.addAll(rsfin);
         rsfin.clear();
         rsfin.addAll(hs);
